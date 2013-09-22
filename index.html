@@ -33,19 +33,27 @@
 			  background: -webkit-linear-gradient();
 			  background-color: #2b2b2b;
 			  */
+			#mobileSensors li img {
+				border-radius: 50%;
+				border: 1px dashed black !important;
+				max-width: 60px;
+				max-height: 60px;
+				padding: 20px;
+				overflow: hidden;
+				display: inline-block;
+				font-size: 2rem;
+			}
+			
+			#mobileSensors li p {
+				margin-top: -30px;
+			}
+			
 			#mobileSensors li {
-				background: #008000;
 				list-style: none;
 				margin: 1em;
-				display: block;
-				border-radius: 50%;
-				width: 100px;
-				height: 100px;
-				border: 4px dotted #F00;
 				text-align: center;
 				line-height: 100px;
 				word-break: normal;
-				overflow: hidden;
 				display: inline-block;
 				position: absolute;
 				font-size: 2rem;
@@ -59,6 +67,10 @@
 				margin-top: -85.868077635827px;
 				width: 531.736155271655px;
 				height: 531.736155271655px;
+			}
+			
+			#mobileSensors .fragment {
+				display: none;
 			}
 			/*}*/
 		</style>
@@ -110,7 +122,8 @@
 					</div>
 				</section>
 				<section data-plannedDuration="45" id="mobileSensors">
-					<img id="mobilePhone" src="images/iphone.png" alt="iPhone" width="200" />
+					<img id="iPhone" src="images/iphone.png" alt="iPhone" width="200" />
+					<img id="Samsung" src="images/samsung_open.png" alt="Samsung E250i" width="150" />
 					<ul></ul>
 					<p class="fragment">hui</p>
 				</section>

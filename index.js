@@ -209,31 +209,49 @@ var charts = {
 	mobileSensors : {
 		INDEXH : 5,
 		init : function () {
-			alert("doch");
 			Reveal.addEventListener("slidechanged", this.start.bind(this));
 			this.start.call(this, event);
 		},
 		start : function (event) {
-			alert("ja");
 			if (event.indexh !== this.INDEXH) {
 				this.stop();				
 				return;
 			}
 			
 			this.canvas = d3.select("#mobileSensors > ul");
-			this.data = ["GPS", "Beschleunigungssensor", "Gyroskop", "Mikrofon", "Frontkamera", "Rückkamera", "3G"];
+			this.data = [
+				{ name : "GPS", icon : "icon/gps.svg" },
+				{ name : "Beschleunigungs-sensor", icon : "icon/gps.svg" },
+				{ name : "Gyroskop", icon : "icon/gyroscope.svg" },
+				{ name : "Mikrofon", icon : "icon/microphone.svg" },
+				{ name : "Frontkamera", icon : "icon/camera.svg" },
+				{ name : "Rückkamera", icon : "icon/camera.svg" },
+				{ name : "3G", icon : "icon/gps.svg" }
+			];
+			
 			this.scaleAngle = d3.scale.linear().domain([0, this.data.length]).range([-Math.PI / 2, Math.PI * 1.5]);
 			
-			this.list = this.canvas.selectAll("li").data(this.data).enter().append("li").text(function (d) { return d; }).style("left", function (d, i) {
-				return Math.cos(this.scaleAngle(i)) * 350 + "px";
+			this.list = this.canvas.selectAll("li").data(this.data).enter().append("li").style("left", function (d, i) {
+				return Math.cos(this.scaleAngle(i)) * 400 + "px";
 			}.bind(this)).style("top", function (d, i) {
-				return Math.sin(this.scaleAngle(i)) * 350 + "px";
+				return Math.sin(this.scaleAngle(i)) * 330 + "px";
 			}.bind(this));
+						
+			this.list.each(function (d) {
+				var li = d3.select(this);
+				li.append("img").attr("width", 40).attr("src", function (d) { return d.icon });
+				li.append("p").text(function (d) { return d.name; });
+			});
 			
 			Reveal.addEventListener("fragmentshown", this.plopp.bind(this));
 		},
 		plopp : function (event) {
-			debugger;
+			d3.select("#iPhone").style("display", "none");
+			d3.select("#Samsung").style("display", "block");
+			
+			this.list.transition().duration(500).delay(function (d, i) {
+				return i * 150 + 700;
+			}).style("top", "1800px");
 		},
 		stop : function (event) {
 			

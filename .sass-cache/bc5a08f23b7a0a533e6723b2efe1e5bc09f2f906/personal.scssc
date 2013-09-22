@@ -1,7 +1,7 @@
 3.2.10 (Media Mark)
-74d962e99382b03ec13078944c0a4aa5cac0298a
+57afe5dd04be3ca8e319658b325810ba4b4d6851
 o:Sass::Tree::RootNode
-:@template"!@mixin vertical-gradient( $top, $bottom ) {
+:@template"¾!@mixin vertical-gradient( $top, $bottom ) {
 	background: $top;
 	background: -moz-linear-gradient( top, $top 0%, $bottom 100% );
 	background: -webkit-gradient( linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom) );
@@ -368,7 +368,7 @@ img {
 	fill: red;
 }
 
-#mobileSensors #mobilePhone {
+#mobileSensors #iPhone {
 	width: 200px;
 	height: 378px;
 	-webkit-wrap-flow: both;
@@ -377,7 +377,19 @@ img {
 	left: 50%;
 	margin-top: -189px;
 	margin-left: -100px;
-}:@children[Ro:Sass::Tree::MixinDefNode:
+}
+
+#mobileSensors #Samsung {
+	width: 150px;
+	height: 378px;
+	-webkit-wrap-flow: both;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -189px;
+	margin-left: -75px;
+	display: none;
+}:@children[So:Sass::Tree::MixinDefNode:
 @name"vertical-gradient;[o:Sass::Tree::PropNode:
 @tabsi ;	["background;[ :@valueo:Sass::Script::Variable	:@underscored_name"top;	"top:@options{ :
 @linei;@;i:@prop_syntax:newo;
@@ -868,6 +880,21 @@ width;[ ;o;;;;"
 ;i ;	["top;[ ;o;;;;"50%;@;@;iu;;o;
 ;i ;	["	left;[ ;o;;;;"50%;@;@;iv;;o;
 ;i ;	["margin-top;[ ;o;;;;"-189px;@;@;iw;;o;
-;i ;	["margin-left;[ ;o;;;;"-100px;@;@;ix;;;@;2[" #mobileSensors #mobilePhone;ip;3o;4;5" ;ip;6[o;7;6[o;8
+;i ;	["margin-left;[ ;o;;;;"-100px;@;@;ix;;;@;2["#mobileSensors #iPhone;ip;3o;4;5" ;ip;6[o;7;6[o;8
 ;90;5@:;:o;;;<{ ;ip;6[o;D;	["mobileSensors;5@:;ipo;8
-;90;5@:;:o;;;<{ ;ip;6[o;D;	["mobilePhone;5@:;ip;!T;@;i;!T
+;90;5@:;:o;;;<{ ;ip;6[o;D;	["iPhone;5@:;ip;!To;0;i ;[o;
+;i ;	["
+width;[ ;o;;;;"
+150px;@;@;i|;;o;
+;i ;	["height;[ ;o;;;;"
+378px;@;@;i};;o;
+;i ;	["-webkit-wrap-flow;[ ;o;;;;"	both;@;@;i~;;o;
+;i ;	["position;[ ;o;;;;"absolute;@;@;i;;o;
+;i ;	["top;[ ;o;;;;"50%;@;@;i€;;o;
+;i ;	["	left;[ ;o;;;;"50%;@;@;i;;o;
+;i ;	["margin-top;[ ;o;;;;"-189px;@;@;i‚;;o;
+;i ;	["margin-left;[ ;o;;;;"
+-75px;@;@;iƒ;;o;
+;i ;	["display;[ ;o;;;;"	none;@;@;i„;;;@;2["#mobileSensors #Samsung;i{;3o;4;5" ;i{;6[o;7;6[o;8
+;90;5@‡;:o;;;<{ ;i{;6[o;D;	["mobileSensors;5@‡;i{o;8
+;90;5@‡;:o;;;<{ ;i{;6[o;D;	["Samsung;5@‡;i{;!T;@;i;!T
