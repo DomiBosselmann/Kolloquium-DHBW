@@ -292,7 +292,7 @@ img {
 
 #intro .contact {
 	position: absolute;
-	bottom: 120px;
+	bottom: 80px;
 	left: 0;
 	height: 60px;
 	line-height: 60px;
@@ -358,6 +358,7 @@ img {
 	display: -webkit-flex;
 	-webkit-align-items: center;
 	-webkit-justify-content: space-around;
+	height: 100%;
 }
 
 #resultsUshahidi .multipleStarPlots .axis .legend {
