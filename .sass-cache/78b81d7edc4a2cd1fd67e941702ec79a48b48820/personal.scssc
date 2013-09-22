@@ -1,7 +1,7 @@
 3.2.10 (Media Mark)
-27d53611b0fa04609d9c9a20465ad076d8e10707
+a57f6f1b8a152e5d7590cd5bf10b39209e948dee
 o:Sass::Tree::RootNode
-:@template"Ð@mixin vertical-gradient( $top, $bottom ) {
+:@template"ö@mixin vertical-gradient( $top, $bottom ) {
 	background: $top;
 	background: -moz-linear-gradient( top, $top 0%, $bottom 100% );
 	background: -webkit-gradient( linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom) );
@@ -338,12 +338,30 @@ img {
 	-webkit-transform: rotate(45deg);
 }
 
+#journeyimages .container {
+	height: 600px;
+	white-space: nowrap;
+	position: absolute;
+	top: 50%;
+	margin-top: -300px;
+	background: $secondaryBackgroundColor;
+}
+
+#journeyimages .container img {
+	height: 600px;
+	width: auto;
+	opacity: 0;
+}
+
+#journeyimages .container img.active {
+	opacity: 1;
+}
 
 #resultsUshahidi > div {
 	display: -webkit-flex;
 	-webkit-align-items: center;
 	-webkit-justify-content: space-around;
-}:@children[Mo:Sass::Tree::MixinDefNode:
+}:@children[Po:Sass::Tree::MixinDefNode:
 @name"vertical-gradient;[o:Sass::Tree::PropNode:
 @tabsi ;	["background;[ :@valueo:Sass::Script::Variable	:@underscored_name"top;	"top:@options{ :
 @linei;@;i:@prop_syntax:newo;
@@ -790,9 +808,30 @@ intro;5@æ;iFo;8
 ;90;5@æ;:o;;;<{ ;iF;6[o;J;5@æ;iF;>0o;@
 ;	["not;;C;5@æ;iF;B[":last-childo;@
 ;	["
-after;;A;5@æ;iF;B0;!To;0;i ;[o;
-;i ;	["display;[ ;o;;;;"-webkit-flex;@;@;iT;;o;
-;i ;	["-webkit-align-items;[ ;o;;;;"center;@;@;iU;;o;
-;i ;	["-webkit-justify-content;[ ;o;;;;"space-around;@;@;iV;;;@;2["#resultsUshahidi > div;iS;3o;4;5" ;iS;6[o;7;6[o;8
-;90;5@;:o;;;<{ ;iS;6[o;D;	["resultsUshahidi;5@;iS">o;8
-;90;5@;:o;;;<{ ;iS;6[o;=	;	["div;5@;iS;>0;!T;@;i;!T
+after;;A;5@æ;iF;B0;!To;0;i ;[o;
+;i ;	["height;[ ;o;;;;"
+600px;@;@;iS;;o;
+;i ;	["white-space;[ ;o;;;;"nowrap;@;@;iT;;o;
+;i ;	["position;[ ;o;;;;"absolute;@;@;iU;;o;
+;i ;	["top;[ ;o;;;;"50%;@;@;iV;;o;
+;i ;	["margin-top;[ ;o;;;;"-300px;@;@;iW;;o;
+;i ;	["background;[ ;o;	;"secondaryBackgroundColor;	"secondaryBackgroundColor;@;iX;@;iX;;;@;2["#journeyimages .container;iR;3o;4;5" ;iR;6[o;7;6[o;8
+;90;5@0;:o;;;<{ ;iR;6[o;D;	["journeyimages;5@0;iRo;8
+;90;5@0;:o;;;<{ ;iR;6[o;?;	["container;5@0;iR;!To;0;i ;[o;
+;i ;	["height;[ ;o;;;;"
+600px;@;@;i\;;o;
+;i ;	["
+width;[ ;o;;;;"	auto;@;@;i];;o;
+;i ;	["opacity;[ ;o;;;;"0;@;@;i^;;;@;2[""#journeyimages .container img;i[;3o;4;5" ;i[;6[o;7;6[o;8
+;90;5@Y;:o;;;<{ ;i[;6[o;D;	["journeyimages;5@Y;i[o;8
+;90;5@Y;:o;;;<{ ;i[;6[o;?;	["container;5@Y;i[o;8
+;90;5@Y;:o;;;<{ ;i[;6[o;=	;	["img;5@Y;i[;>0;!To;0;i ;[o;
+;i ;	["opacity;[ ;o;;;;"1;@;@;ib;;;@;2[")#journeyimages .container img.active;ia;3o;4;5" ;ia;6[o;7;6[o;8
+;90;5@};:o;;;<{ ;ia;6[o;D;	["journeyimages;5@};iao;8
+;90;5@};:o;;;<{ ;ia;6[o;?;	["container;5@};iao;8
+;90;5@};:o;;;<{ ;ia;6[o;=	;	["img;5@};ia;>0o;?;	["active;5@};ia;!To;0;i ;[o;
+;i ;	["display;[ ;o;;;;"-webkit-flex;@;@;if;;o;
+;i ;	["-webkit-align-items;[ ;o;;;;"center;@;@;ig;;o;
+;i ;	["-webkit-justify-content;[ ;o;;;;"space-around;@;@;ih;;;@;2["#resultsUshahidi > div;ie;3o;4;5" ;ie;6[o;7;6[o;8
+;90;5@°;:o;;;<{ ;ie;6[o;D;	["resultsUshahidi;5@°;ie">o;8
+;90;5@°;:o;;;<{ ;ie;6[o;=	;	["div;5@°;ie;>0;!T;@;i;!T
