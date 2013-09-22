@@ -78,7 +78,7 @@ var RadarChart = {
                      .attr("points",function(d) {
                          var str="";
                          for(var pti=0;pti<d.length;pti++){
-                             str=str+d[pti][0]+","+d[pti][1]+" ";
+                             str += cfg.w / 2 + "," + cfg.h / 2 + " ";
                          }
                          return str;
                       })
@@ -91,28 +91,27 @@ var RadarChart = {
                                       })
                      .on('mouseout', function(){
                                         g.selectAll("polygon").transition(200).style("fill-opacity", cfg.opacityArea);
-                     });
+                     }).transition().duration(1500).attr("points",function(d) {
+                         var str="";
+                         for(var pti=0;pti<d.length;pti++){
+                             str=str+d[pti][0]+","+d[pti][1]+" ";
+                         }
+                         return str;
+                      });
       series++;
     });
     series=0;
 
 
     d.forEach(function(y, x){
-      g.selectAll(".nodes")
+      var circle = g.selectAll(".nodes")
         .data(y).enter()
-        .append("svg:circle").attr("class", "radar-chart-serie"+series)
-        .attr('r', cfg.radius)
+        .append("svg:circle").attr("class", "radar-chart-serie"+series);
+        
+      circle.attr('r', cfg.radius)
         .attr("alt", function(j){return Math.max(j.value, 0)})
-        .attr("cx", function(j, i){
-          dataValues.push([
-            cfg.w/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)), 
-            cfg.h/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
-        ]);
-        return cfg.w/2*(1-(Math.max(j.value, 0)/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total));
-        })
-        .attr("cy", function(j, i){
-          return cfg.h/2*(1-(Math.max(j.value, 0)/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total));
-        })
+        .attr("cx", cfg.w / 2)
+        .attr("cy", cfg.h / 2)
         .attr("data-id", function(j){return j.axis})
         .style("fill", cfg.color(series)).style("fill-opacity", .9)
         .on('mouseover', function (d){
@@ -127,7 +126,18 @@ var RadarChart = {
                     tooltip.transition(200).style('opacity', 0);
                     g.selectAll("polygon").transition(200).style("fill-opacity", cfg.opacityArea);
                   })
-        .append("svg:title")
+        .transition().duration(1500).attr("cx", function(j, i){
+	          dataValues.push([
+	            cfg.w/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)), 
+	            cfg.h/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
+	        ]);
+	        return cfg.w/2*(1-(Math.max(j.value, 0)/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total));
+        })
+        .attr("cy", function(j, i){
+          return cfg.h/2*(1-(Math.max(j.value, 0)/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total));
+        });
+        
+        circle.append("svg:title")
         .text(function(j){return Math.max(j.value, 0)});
 
       series++;

@@ -1,7 +1,7 @@
 3.2.10 (Media Mark)
-a57f6f1b8a152e5d7590cd5bf10b39209e948dee
+b75399e23fcecd605c958d71c2f039744ae2dcf9
 o:Sass::Tree::RootNode
-:@template"ö@mixin vertical-gradient( $top, $bottom ) {
+:@template"9 @mixin vertical-gradient( $top, $bottom ) {
 	background: $top;
 	background: -moz-linear-gradient( top, $top 0%, $bottom 100% );
 	background: -webkit-gradient( linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom) );
@@ -361,7 +361,11 @@ img {
 	display: -webkit-flex;
 	-webkit-align-items: center;
 	-webkit-justify-content: space-around;
-}:@children[Po:Sass::Tree::MixinDefNode:
+}
+
+#resultsUshahidi .multipleStarPlots .axis .legend {
+	fill: red;
+}:@children[Qo:Sass::Tree::MixinDefNode:
 @name"vertical-gradient;[o:Sass::Tree::PropNode:
 @tabsi ;	["background;[ :@valueo:Sass::Script::Variable	:@underscored_name"top;	"top:@options{ :
 @linei;@;i:@prop_syntax:newo;
@@ -834,4 +838,9 @@ width;[ ;o;;;;"	auto;@;@;i];;o;
 ;i ;	["-webkit-align-items;[ ;o;;;;"center;@;@;ig;;o;
 ;i ;	["-webkit-justify-content;[ ;o;;;;"space-around;@;@;ih;;;@;2["#resultsUshahidi > div;ie;3o;4;5" ;ie;6[o;7;6[o;8
 ;90;5@°;:o;;;<{ ;ie;6[o;D;	["resultsUshahidi;5@°;ie">o;8
-;90;5@°;:o;;;<{ ;ie;6[o;=	;	["div;5@°;ie;>0;!T;@;i;!T
+;90;5@°;:o;;;<{ ;ie;6[o;=	;	["div;5@°;ie;>0;!To;0;i ;[o;
+;i ;	["	fill;[ ;o;;;;"red;@;@;il;;;@;2["6#resultsUshahidi .multipleStarPlots .axis .legend;ik;3o;4;5" ;ik;6[o;7;6[	o;8
+;90;5@Î;:o;;;<{ ;ik;6[o;D;	["resultsUshahidi;5@Î;iko;8
+;90;5@Î;:o;;;<{ ;ik;6[o;?;	["multipleStarPlots;5@Î;iko;8
+;90;5@Î;:o;;;<{ ;ik;6[o;?;	["	axis;5@Î;iko;8
+;90;5@Î;:o;;;<{ ;ik;6[o;?;	["legend;5@Î;ik;!T;@;i;!T

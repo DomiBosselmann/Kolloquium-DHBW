@@ -79,7 +79,7 @@ var charts = {
 		FFT_SIZE : 1024,
 		WIDTH : 1800,
 		HEIGHT : 1080,
-		INDEXH : 2,
+		INDEXH : 3,
 		EPSILON : 3,
 		init : function () {
 			Reveal.addEventListener("slidechanged", this.start.bind(this));
@@ -207,7 +207,7 @@ var charts = {
 		}
 	},
 	mobileSensors : {
-		INDEXH : 4,
+		INDEXH : 5,
 		init : function () {
 			alert("doch");
 			Reveal.addEventListener("slidechanged", this.start.bind(this));
@@ -235,7 +235,7 @@ var charts = {
 		}
 	},
 	resultsUshahidi : {
-		INDEXH : 3,
+		INDEXH : 4,
 		init : function () {
 			Reveal.addEventListener("slidechanged", this.start.bind(this));
 			this.start.call(this, event);
@@ -296,6 +296,18 @@ var charts = {
 			});
 			
 			// 
+		},
+		stop : function () {
+			
+		}
+	},
+	picnic : {
+		INDEXH: 6,
+		init : function () {
+			
+		},
+		start : function (event) {
+			
 		},
 		stop : function () {
 			
