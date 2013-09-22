@@ -42,7 +42,7 @@ img {
   font-weight: bold; }
 
 .reveal h1 {
-  font-size: 3rem; }
+  font-size: 3.5rem; }
 
 /*********************************************
  * LINKS
@@ -129,16 +129,23 @@ img {
 * FOLIE FÜR FOLIE.
 ****/
 #intro h1 {
-  padding-left: 63vh;
-  padding-top: 37vh; }
+  padding-left: 53vh;
+  padding-top: 30vh;
+  white-space: pre; }
+
+#intro h1 strong::before {
+  content: "\A"; }
+
+#intro h1 strong::after {
+  content: "\A"; }
 
 #intro .excluder {
   width: 200px;
   height: 200px;
   -webkit-shape-outside: polygon(0 0, 100% 0, 0 100%);
   float: left;
-  margin-left: 63vh;
-  margin-top: 34vh; }
+  margin-left: 50vh;
+  margin-top: 29vh; }
 
 #intro .company {
   background: #cde9f3;
