@@ -82,7 +82,7 @@ var charts = {
 		EPSILON : 3,
 		init : function () {
 			Reveal.addEventListener("slidechanged", this.start.bind(this));
-			this.start.call(this);
+			this.start.call(this, event);
 		},
 		start : function (event) {
 			if (event.indexh !== this.INDEXH) {
@@ -201,10 +201,39 @@ var charts = {
 			this.cancelDraw = true;
 			this.path.remove();
 		}
+	},
+	mobileSensors : {
+		INDEXH : 3,
+		init : function () {
+			alert("doch");
+			Reveal.addEventListener("slidechanged", this.start.bind(this));
+			this.start.call(this, event);
+		},
+		start : function (event) {
+			alert("ja");
+			if (event.indexh !== this.INDEXH) {
+				this.stop();				
+				return;
+			}
+			
+			this.canvas = d3.select("#mobileSensors > ul");
+			this.data = ["GPS", "Beschleunigungssensor", "Gyroskop", "Mikrofon", "Frontkamera", "Rückkamera"];
+			
+			this.list = canvas.selectAll("li").data(data).enter().append("li").text(function (d) { return d; });
+			
+			Reveal.addEventListener("fragmentshown", this.plopp.bind(this));
+		},
+		plopp : function (event) {
+			debugger;
+		},
+		stop : function (event) {
+			
+		}
 	}
 }
 
 Reveal.addEventListener( 'ready', function( event ) {
 	charts.crime.init.call(charts.crime);
 	charts.audio.init.call(charts.audio);
+	charts.mobileSensors.init.call(charts.mobileSensors);
 });
