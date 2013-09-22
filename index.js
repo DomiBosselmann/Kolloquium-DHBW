@@ -304,10 +304,53 @@ var charts = {
 	picnic : {
 		INDEXH: 6,
 		init : function () {
-			
+			Reveal.addEventListener("slidechanged", this.start.bind(this));
+			this.start.call(this, event);
 		},
 		start : function (event) {
+			if (event.indexh !== this.INDEXH) {
+				this.stop();				
+				return;
+			}
 			
+			this.data = [{
+				name : "bla",
+				data : [
+					{ axis: "P", value: 1 },
+					{ axis: "I", value: 0.1 },
+					{ axis: "C", value: 0.1 },
+					{ axis: "M", value: 1 }
+				]	
+			}, {
+				name : "bla",
+				data : [
+					{ axis: "P", value: 1 },
+					{ axis: "I", value: 0.1 },
+					{ axis: "C", value: 0.1 },
+					{ axis: "M", value: 1 }
+				]	
+			}, {
+				name : "bla",
+				data : [
+					{ axis: "P", value: 0.8 },
+					{ axis: "I", value: 0.1 },
+					{ axis: "C", value: 0.1 },
+					{ axis: "M", value: 0.5 }
+				]	
+			}];
+			
+			this.container = d3.select("#picnic > div");
+			
+			var enter = this.container.selectAll("div").data(this.data).enter();
+			var chartContainers = enter.append("div").classed("multipleStarPlots", true);
+			var charts = chartContainers.append("svg").attr("width", 300).attr("height", 300);
+			chartContainers.append("p").text(function (d) {
+				return d.name;
+			});
+						
+			chartContainers.each(function (d, i, e) {
+				RadarChart.draw(d3.select(this), [d.data], { w: 300, h: 300 });
+			});
 		},
 		stop : function () {
 			
@@ -320,4 +363,5 @@ Reveal.addEventListener( 'ready', function( event ) {
 	charts.audio.init.call(charts.audio);
 	charts.mobileSensors.init.call(charts.mobileSensors);
 	charts.resultsUshahidi.init.call(charts.resultsUshahidi);
+	charts.picnic.init.call(charts.picnic);
 });
