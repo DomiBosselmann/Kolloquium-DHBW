@@ -1,5 +1,6 @@
 var requestAnimFrame = window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
 var cancelRequestAnimFrame = window.webkitCancelRequestAnimationFrame || window.mozCancelRequestAnimationFrame;
+var getUserMedia = navigator.webkitGetUserMedia ? "webkitGetUserMedia" : "mozGetUserMedia";
 
 var charts = {
 	crime : {
@@ -97,7 +98,7 @@ var charts = {
 						
 			this.cancelDraw = false;
 			
-			this.context = new window.AudioContext();
+			this.context = window.AudioContext ? (new window.AudioContext()) : new window.webkitAudioContext;
 			this.analyser = this.context.createAnalyser();
 			
 			this.analyser.minDecibels = -140;
@@ -110,7 +111,7 @@ var charts = {
 			
 			
 			// Not showing vendor prefixes.
-			navigator.mozGetUserMedia({video: false, audio: true}, function(audioStream) {
+			navigator[getUserMedia]({video: false, audio: true}, function(audioStream) {
 				
 				self.audioStream = audioStream;
 				self.microphone = self.context.createMediaStreamSource(audioStream);
@@ -126,8 +127,11 @@ var charts = {
 			
 			
 			
+			var dimensions = document.getElementById("audio").getBoundingClientRect();
 			
 			this.svg = d3.select("#audio");
+			this.WIDTH = dimensions.width;
+			this.HEIGHT = dimensions.height;
 			this.path = this.svg.append("path").attr("stroke-width", "2").attr("stroke", "red").attr("fill", "none");
 			this.xRange = d3.scale.linear().range([0, this.WIDTH]).domain([0, this.analyser.frequencyBinCount]);
 			this.yRange = d3.scale.linear().range([0, this.HEIGHT]).domain([0, 256]);
@@ -191,7 +195,7 @@ var charts = {
 			}
 									
 			this.path.attr("d", this.lineFunction(lowpass.call(this, this.times))).attr("stroke", function () {
-				return "hsl(" + this.colorRange(d3.mean(this.freqs)) + ", 100%, 50%)";
+				return "hsl(" + this.colorRange(d3.mean(this.freqs)) + ", 70%, 40%)";
 			}.bind(this));
 			
 			this.animationFrame = !this.cancelDraw ? requestAnimFrame(this.draw.bind(this)) : null;

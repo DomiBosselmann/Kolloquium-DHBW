@@ -334,3 +334,22 @@ img {
 	background: $mainColor;
 	-webkit-transform: rotate(45deg);
 }
+
+#journeyimages .container {
+	height: 600px;
+	white-space: nowrap;
+	position: absolute;
+	top: 50%;
+	margin-top: -300px;
+	background: $secondaryBackgroundColor;
+}
+
+#journeyimages .container img {
+	height: 600px;
+	width: auto;
+	opacity: 0;
+}
+
+#journeyimages .container img.active {
+	opacity: 1;
+}
