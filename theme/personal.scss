@@ -334,3 +334,10 @@ img {
 	background: $mainColor;
 	-webkit-transform: rotate(45deg);
 }
+
+
+#resultsUshahidi > div {
+	display: -webkit-flex;
+	-webkit-align-items: center;
+	-webkit-justify-content: space-around;
+}

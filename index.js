@@ -203,7 +203,7 @@ var charts = {
 		}
 	},
 	mobileSensors : {
-		INDEXH : 3,
+		INDEXH : 4,
 		init : function () {
 			alert("doch");
 			Reveal.addEventListener("slidechanged", this.start.bind(this));
@@ -229,6 +229,73 @@ var charts = {
 		stop : function (event) {
 			
 		}
+	},
+	resultsUshahidi : {
+		INDEXH : 3,
+		init : function () {
+			Reveal.addEventListener("slidechanged", this.start.bind(this));
+			this.start.call(this, event);
+		},
+		start : function (event) {
+			if (event.indexh !== this.INDEXH) {
+				this.stop();				
+				return;
+			}
+						
+			this.data = [
+				{
+					name : "Uchaguzi (Kenia)",
+					data : [
+						{ axis: "Anzahl Meldungen pro Tag", value: 100 }, 
+						{ axis: "Meldungen via SMS", value: 87.5 },  
+						{ axis: "Verifizierte Meldungen", value: 64.8 }
+					]
+				},
+				{
+					name : "www.reclaimnaija.net (Nigeria)",
+					data : [
+						{ axis: "Anzahl Meldungen pro Tag", value: 2.75 },
+						{ axis: "Anzahl Meldungen pro Tag", value: 0 }, 
+						{ axis: "Verifizierte Meldungen", value: 0.2 }
+					]
+				},
+				{
+					name : "Ghana Votes 2012 (Ghana)",
+					data : [
+						{ axis: "Anzahl Meldungen pro Tag", value: 6.52 }, 
+						{ axis: "Meldungen via SMS", value: 11.3 },  
+						{ axis: "Verifizierte Meldungen", value: 85.2 }
+					]
+				},
+				{
+					name : "Syria Tracker (Syrien)",
+					data : [
+						{ axis: "Anzahl Meldungen pro Tag", value: 3.47 }, 
+						{ axis: "Meldungen via SMS", value: 0 },  
+						{ axis: "Verifizierte Meldungen", value: 98.4 }
+					]
+				}
+			];
+					
+			
+			this.container = d3.select("#resultsUshahidi > div");
+			
+			var enter = this.container.selectAll("div").data(this.data).enter();
+			var chartContainers = enter.append("div").classed("multipleStarPlots", true);
+			var charts = chartContainers.append("svg").attr("width", 300).attr("height", 300);
+			chartContainers.append("p").text(function (d) {
+				return d.name;
+			});
+						
+			chartContainers.each(function (d, i, e) {
+				RadarChart.draw(d3.select(this), [d.data], { w: 300, h: 300 });
+			});
+			
+			// 
+		},
+		stop : function () {
+			
+		}
 	}
 }
 
@@ -236,4 +303,5 @@ Reveal.addEventListener( 'ready', function( event ) {
 	charts.crime.init.call(charts.crime);
 	charts.audio.init.call(charts.audio);
 	charts.mobileSensors.init.call(charts.mobileSensors);
+	charts.resultsUshahidi.init.call(charts.resultsUshahidi);
 });
