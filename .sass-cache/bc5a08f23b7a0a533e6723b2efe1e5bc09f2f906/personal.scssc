@@ -1,7 +1,7 @@
 3.2.10 (Media Mark)
-10c37cecef154c6394fc504ea5a9abb6b15b1460
+74d962e99382b03ec13078944c0a4aa5cac0298a
 o:Sass::Tree::RootNode
-:@template"|@mixin vertical-gradient( $top, $bottom ) {
+:@template"!@mixin vertical-gradient( $top, $bottom ) {
 	background: $top;
 	background: -moz-linear-gradient( top, $top 0%, $bottom 100% );
 	background: -webkit-gradient( linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom) );
@@ -295,7 +295,7 @@ img {
 
 #intro .contact {
 	position: absolute;
-	bottom: 120px;
+	bottom: 80px;
 	left: 0;
 	height: 60px;
 	line-height: 60px;
@@ -355,7 +355,29 @@ img {
 
 #journeyimages .container img.active {
 	opacity: 1;
-}:@children[Oo:Sass::Tree::MixinDefNode:
+}
+
+#resultsUshahidi > div, #picnic > div {
+	display: -webkit-flex;
+	-webkit-align-items: center;
+	-webkit-justify-content: space-around;
+	height: 100%;
+}
+
+#resultsUshahidi .multipleStarPlots .axis .legend {
+	fill: red;
+}
+
+#mobileSensors #mobilePhone {
+	width: 200px;
+	height: 378px;
+	-webkit-wrap-flow: both;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -189px;
+	margin-left: -100px;
+}:@children[Ro:Sass::Tree::MixinDefNode:
 @name"vertical-gradient;[o:Sass::Tree::PropNode:
 @tabsi ;	["background;[ :@valueo:Sass::Script::Variable	:@underscored_name"top;	"top:@options{ :
 @linei;@;i:@prop_syntax:newo;
@@ -740,8 +762,7 @@ intro;5@Å
 ;i;>0o;?;	["	dhbw;5@Å
 ;i;!To;0;i ;[o;
 ;i ;	["position;[ ;o;;;;"absolute;@;@;i&;;o;
-;i ;	["bottom;[ ;o;;;;"
-120px;@;@;i';;o;
+;i ;	["bottom;[ ;o;;;;"	80px;@;@;i';;o;
 ;i ;	["	left;[ ;o;;;;"0;@;@;i(;;o;
 ;i ;	["height;[ ;o;;;;"	60px;@;@;i);;o;
 ;i ;	["line-height;[ ;o;;;;"	60px;@;@;i*;;o;
@@ -823,4 +844,30 @@ width;[ ;o;;;;"	auto;@;@;i];;o;
 ;i ;	["opacity;[ ;o;;;;"1;@;@;ib;;;@;2[")#journeyimages .container img.active;ia;3o;4;5" ;ia;6[o;7;6[o;8
 ;90;5@};:o;;;<{ ;ia;6[o;D;	["journeyimages;5@};iao;8
 ;90;5@};:o;;;<{ ;ia;6[o;?;	["container;5@};iao;8
-;90;5@};:o;;;<{ ;ia;6[o;=	;	["img;5@};ia;>0o;?;	["active;5@};ia;!T;@;i;!T
+;90;5@};:o;;;<{ ;ia;6[o;=	;	["img;5@};ia;>0o;?;	["active;5@};ia;!To;0;i ;[	o;
+;i ;	["display;[ ;o;;;;"-webkit-flex;@;@;if;;o;
+;i ;	["-webkit-align-items;[ ;o;;;;"center;@;@;ig;;o;
+;i ;	["-webkit-justify-content;[ ;o;;;;"space-around;@;@;ih;;o;
+;i ;	["height;[ ;o;;;;"	100%;@;@;ii;;;@;2["*#resultsUshahidi > div, #picnic > div;ie;3o;4;5" ;ie;6[o;7;6[o;8
+;90;5@∂;:o;;;<{ ;ie;6[o;D;	["resultsUshahidi;5@∂;ie">o;8
+;90;5@∂;:o;;;<{ ;ie;6[o;=	;	["div;5@∂;ie;>0o;7;6[o;8
+;90;5@∂;:o;;;<{ ;ie;6[o;D;	["picnic;5@∂;ie">o;8
+;90;5@∂;:o;;;<{ ;ie;6[o;=	;	["div;5@∂;ie;>0;!To;0;i ;[o;
+;i ;	["	fill;[ ;o;;;;"red;@;@;im;;;@;2["6#resultsUshahidi .multipleStarPlots .axis .legend;il;3o;4;5" ;il;6[o;7;6[	o;8
+;90;5@Â;:o;;;<{ ;il;6[o;D;	["resultsUshahidi;5@Â;ilo;8
+;90;5@Â;:o;;;<{ ;il;6[o;?;	["multipleStarPlots;5@Â;ilo;8
+;90;5@Â;:o;;;<{ ;il;6[o;?;	["	axis;5@Â;ilo;8
+;90;5@Â;:o;;;<{ ;il;6[o;?;	["legend;5@Â;il;!To;0;i ;[o;
+;i ;	["
+width;[ ;o;;;;"
+200px;@;@;iq;;o;
+;i ;	["height;[ ;o;;;;"
+378px;@;@;ir;;o;
+;i ;	["-webkit-wrap-flow;[ ;o;;;;"	both;@;@;is;;o;
+;i ;	["position;[ ;o;;;;"absolute;@;@;it;;o;
+;i ;	["top;[ ;o;;;;"50%;@;@;iu;;o;
+;i ;	["	left;[ ;o;;;;"50%;@;@;iv;;o;
+;i ;	["margin-top;[ ;o;;;;"-189px;@;@;iw;;o;
+;i ;	["margin-left;[ ;o;;;;"-100px;@;@;ix;;;@;2[" #mobileSensors #mobilePhone;ip;3o;4;5" ;ip;6[o;7;6[o;8
+;90;5@:;:o;;;<{ ;ip;6[o;D;	["mobileSensors;5@:;ipo;8
+;90;5@:;:o;;;<{ ;ip;6[o;D;	["mobilePhone;5@:;ip;!T;@;i;!T

@@ -221,9 +221,14 @@ var charts = {
 			}
 			
 			this.canvas = d3.select("#mobileSensors > ul");
-			this.data = ["GPS", "Beschleunigungssensor", "Gyroskop", "Mikrofon", "Frontkamera", "Rückkamera"];
+			this.data = ["GPS", "Beschleunigungssensor", "Gyroskop", "Mikrofon", "Frontkamera", "Rückkamera", "3G"];
+			this.scaleAngle = d3.scale.linear().domain([0, this.data.length]).range([-Math.PI / 2, Math.PI * 1.5]);
 			
-			this.list = canvas.selectAll("li").data(data).enter().append("li").text(function (d) { return d; });
+			this.list = this.canvas.selectAll("li").data(this.data).enter().append("li").text(function (d) { return d; }).style("left", function (d, i) {
+				return Math.cos(this.scaleAngle(i)) * 350 + "px";
+			}.bind(this)).style("top", function (d, i) {
+				return Math.sin(this.scaleAngle(i)) * 350 + "px";
+			}.bind(this));
 			
 			Reveal.addEventListener("fragmentshown", this.plopp.bind(this));
 		},
