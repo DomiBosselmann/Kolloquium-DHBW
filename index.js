@@ -3,75 +3,101 @@ var cancelRequestAnimFrame = window.webkitCancelRequestAnimationFrame || window
 var getUserMedia = navigator.webkitGetUserMedia ? "webkitGetUserMedia" : "mozGetUserMedia";
 
 var charts = {
-	crime : {
+	journey : {
+		INDEXH: 1,
 		init : function () {
-			//alert("hello world");
-			
-			//var slide = document.getElementById("SACrime");
 			Reveal.addEventListener("slidechanged", this.start.bind(this));
+			this.start.call(this, event);
 		},
-		start : function () {
+		start : function (event) {
+			if (event.indexh !== this.INDEXH) {
+				if (this.context) {
+					this.stop();
+				}
+				
+				return;
+			}
+			
+			d3.select("#journeyimages").transition().duration(60000).ease("linear").style("margin-left", "-3043px");
+		},
+		stop : function () {
+			
+		},
+		nextImage : function () {
+				
+		}
+	},
+	crime : {
+		INDEXH: 2,
+		init : function () {
+			Reveal.addEventListener("slidechanged", this.start.bind(this));
+			this.start.call(this, event);
+		},
+		start : function (event) {
+			if (event.indexh !== this.INDEXH) {
+				if (this.context) {
+					this.stop();
+				}
+				
+				return;
+			}
+			
 			var self = this;
 			
 			this.svg = d3.select("#crime");
 			
-			this.data = [200, 500, 800];
+			this.data = [220000, 240000];
 			
-			this.xRange = d3.scale.linear().range([0, 1200]).domain([0,this.data.length - 1]);
-			this.yRange = d3.scale.linear().range([0, 700]).domain([0, 800]);
-			this.xAxis = d3.svg.axis().scale(this.xRange).tickSubdivide(0).tickSize(9,6,2).tickPadding(8).orient("bottom");
+			this.xRange = d3.scale.linear().range([200, 900]).domain([0, 3]);
+			this.yRange = d3.scale.linear().range([600, 0]).domain([0, 250000]);
+			this.xAxis = d3.svg.axis().scale(this.xRange).tickSubdivide(0).tickSize(9,6,2).tickPadding(8).orient("top");
 			this.yAxis = d3.svg.axis().scale(this.yRange).ticks(3).tickSubdivide(1).tickSize(9, 6, 2).orient("left");
 			
-			var xAxis = this.svg.append("svg:g");
-			var yAxis = this.svg.append("svg:g");
+			this.xAxisElement = this.svg.append("svg:g");
+			this.yAxisElement = this.svg.append("svg:g").attr("transform", "translate(200,0)");
 			
-			xAxis.call(this.xAxis);
-			yAxis.call(this.yAxis);
+			this.xAxisElement.call(this.xAxis);
+			this.yAxisElement.call(this.yAxis);
+						
 			
-			
-			this.svg.selectAll("rect").data(this.data).enter().append("rect").attr("y", 700).attr("height", function (d) {
+			this.svg.selectAll("rect").data(this.data).enter().append("rect").attr("y", 600).attr("height", function (d) {
 				return 0;
 			}).attr("width", 200).attr("fill", "green").attr("x", function (d, i) {
-				return 210 * i;
-			}).transition().duration(12550).delay(function (d, i) {
-				return i * 300;
-			}).attr("height", function (d) {
-				return self.yRange(d);
+				return self.xRange(i);
+			}).transition().duration(3550).attr("height", function (d) {
+				return 600 - self.yRange(d);
 			}).attr("y", function (d, i) {
-				console.log(700 - self.yRange(d));
-				return 700 - self.yRange(d);
+				return self.yRange(d);
 			});
-			
-			//alert("immer weiter");
-			window.setTimeout(this.showSouthAfricaPrivate.bind(this), 12550);
+						
+			Reveal.addEventListener("fragmentshown", this.showSouthAfricaPrivate);
 		},
 		showSouthAfricaPrivate : function () {
-			//alert("boah, jetzt wirds aber verboten");
+		
+			var self = charts.crime;
 			
-			var self = this;
+			self.data.push(480000);
+			self.yRange = self.yRange.domain([0, 500000]);
 			
-			this.data.push(8000);
-			this.yRange = this.yRange.domain([0, 8000]);
-			
-			this.svg.selectAll("rect").data(this.data).transition().duration(12550).delay(function (d, i) {
-				return i * 300;
-			}).attr("height", function (d) {
-				return self.yRange(d);
+			self.svg.selectAll("rect").data(self.data).transition().duration(3550).attr("height", function (d) {
+				return 600 - self.yRange(d);
 			}).attr("y", function (d, i) {
-				return 700 - self.yRange(d);
+				return self.yRange(d);
 			});
 			
-			this.svg.selectAll("rect").data(this.data).enter().append("rect").attr("y", 700).attr("height", function (d) {
+			self.svg.selectAll("rect").data(self.data).enter().append("rect").attr("y", 600).attr("height", function (d) {
 				return 0;
 			}).attr("width", 200).attr("fill", "green").attr("x", function (d, i) {
-				return 210 * i;
-			}).transition().duration(12550).delay(function (d, i) {
-				return i * 300;
-			}).attr("height", function (d) {
-				return self.yRange(d);
+				return self.xRange(i);
+			}).transition().duration(3550).attr("height", function (d) {
+				return 600 - self.yRange(d);
 			}).attr("y", function (d, i) {
-				return 700 - self.yRange(d);
+				return self.yRange(d);
 			});
+			
+			self.yAxisElement.transition().duration(3550).call(self.yAxis);
+			
+			Reveal.removeEventListener("fragmentshown", charts.crime.showSouthAfricaPrivate);
 		}
 	},
 	audio : {
@@ -93,7 +119,7 @@ var charts = {
 				
 				return;
 			}
-			
+						
 			var self = this;
 						
 			this.cancelDraw = false;
@@ -207,7 +233,7 @@ var charts = {
 		}
 	},
 	mobileSensors : {
-		INDEXH : 5,
+		INDEXH : 6,
 		init : function () {
 			Reveal.addEventListener("slidechanged", this.start.bind(this));
 			this.start.call(this, event);
@@ -243,22 +269,24 @@ var charts = {
 				li.append("p").text(function (d) { return d.name; });
 			});
 			
-			Reveal.addEventListener("fragmentshown", this.plopp.bind(this));
+			Reveal.addEventListener("fragmentshown", this.plopp);
 		},
 		plopp : function (event) {
 			d3.select("#iPhone").style("display", "none");
 			d3.select("#Samsung").style("display", "block");
 			
-			this.list.transition().duration(500).delay(function (d, i) {
+			charts.mobileSensors.list.transition().duration(500).delay(function (d, i) {
 				return i * 150 + 700;
 			}).style("top", "1800px");
+			
+			Reveal.removeEventListener("fragmentshown", charts.mobileSensors.plopp);
 		},
 		stop : function (event) {
 			
 		}
 	},
 	resultsUshahidi : {
-		INDEXH : 4,
+		INDEXH : 5,
 		init : function () {
 			Reveal.addEventListener("slidechanged", this.start.bind(this));
 			this.start.call(this, event);
@@ -276,7 +304,8 @@ var charts = {
 						{ axis: "Anzahl Meldungen pro Tag", value: 100 }, 
 						{ axis: "Meldungen via SMS", value: 87.5 },  
 						{ axis: "Verifizierte Meldungen", value: 64.8 }
-					]
+					],
+					color : "#004c67"
 				},
 				{
 					name : "www.reclaimnaija.net (Nigeria)",
@@ -284,7 +313,8 @@ var charts = {
 						{ axis: "Anzahl Meldungen pro Tag", value: 2.75 },
 						{ axis: "Anzahl Meldungen pro Tag", value: 0 }, 
 						{ axis: "Verifizierte Meldungen", value: 0.2 }
-					]
+					],
+					color : "#310067"
 				},
 				{
 					name : "Ghana Votes 2012 (Ghana)",
@@ -292,7 +322,8 @@ var charts = {
 						{ axis: "Anzahl Meldungen pro Tag", value: 6.52 }, 
 						{ axis: "Meldungen via SMS", value: 11.3 },  
 						{ axis: "Verifizierte Meldungen", value: 85.2 }
-					]
+					],
+					color : "#670200"
 				},
 				{
 					name : "Syria Tracker (Syrien)",
@@ -300,7 +331,8 @@ var charts = {
 						{ axis: "Anzahl Meldungen pro Tag", value: 3.47 }, 
 						{ axis: "Meldungen via SMS", value: 0 },  
 						{ axis: "Verifizierte Meldungen", value: 98.4 }
-					]
+					],
+					color : "#196700"
 				}
 			];
 					
@@ -310,12 +342,13 @@ var charts = {
 			var enter = this.container.selectAll("div").data(this.data).enter();
 			var chartContainers = enter.append("div").classed("multipleStarPlots", true);
 			var charts = chartContainers.append("svg").attr("width", 300).attr("height", 300);
-			chartContainers.append("p").text(function (d) {
-				return d.name;
-			});
 						
 			chartContainers.each(function (d, i, e) {
-				RadarChart.draw(d3.select(this), [d.data], { w: 300, h: 300 });
+				RadarChart.draw(d3.select(this), [d.data], { w: 300, h: 300, color : function () { return d.color } });
+			});
+			
+			chartContainers.append("p").text(function (d) {
+				return d.name;
 			});
 			
 			// 
@@ -325,7 +358,7 @@ var charts = {
 		}
 	},
 	picnic : {
-		INDEXH: 6,
+		INDEXH: 8,
 		init : function () {
 			Reveal.addEventListener("slidechanged", this.start.bind(this));
 			this.start.call(this, event);
@@ -337,43 +370,47 @@ var charts = {
 			}
 			
 			this.data = [{
-				name : "bla",
+				name : "Meine persönliche Sicherheit wird verbessert",
 				data : [
 					{ axis: "P", value: 1 },
 					{ axis: "I", value: 0.1 },
 					{ axis: "C", value: 0.1 },
 					{ axis: "M", value: 1 }
-				]	
+				],
+				color : "#004c67"
 			}, {
-				name : "bla",
+				name : "Jemand bekommt Hilfe",
 				data : [
 					{ axis: "P", value: 1 },
 					{ axis: "I", value: 0.1 },
 					{ axis: "C", value: 0.1 },
 					{ axis: "M", value: 1 }
-				]	
+				],
+				color : "#310067"
 			}, {
-				name : "bla",
+				name : "Misstände aufzeigen",
 				data : [
 					{ axis: "P", value: 0.8 },
 					{ axis: "I", value: 0.1 },
 					{ axis: "C", value: 0.1 },
 					{ axis: "M", value: 0.5 }
-				]	
+				],
+				color : "#670200"
 			}];
 			
 			this.container = d3.select("#picnic > div");
 			
 			var enter = this.container.selectAll("div").data(this.data).enter();
 			var chartContainers = enter.append("div").classed("multipleStarPlots", true);
-			var charts = chartContainers.append("svg").attr("width", 300).attr("height", 300);
+			var charts = chartContainers.append("svg").attr("width", 300).attr("height", 300);						
+			chartContainers.each(function (d, i, e) {
+				RadarChart.draw(d3.select(this), [d.data], { w: 300, h: 300, color : function () { return d.color } });
+			});
+			
 			chartContainers.append("p").text(function (d) {
 				return d.name;
 			});
-						
-			chartContainers.each(function (d, i, e) {
-				RadarChart.draw(d3.select(this), [d.data], { w: 300, h: 300 });
-			});
+
 		},
 		stop : function () {
 			
@@ -383,6 +420,7 @@ var charts = {
 
 Reveal.addEventListener( 'ready', function( event ) {
 	charts.crime.init.call(charts.crime);
+	charts.journey.init.call(charts.journey);
 	charts.audio.init.call(charts.audio);
 	charts.mobileSensors.init.call(charts.mobileSensors);
 	charts.resultsUshahidi.init.call(charts.resultsUshahidi);

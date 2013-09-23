@@ -211,7 +211,7 @@ img {
   background: #004c67;
   -webkit-transform: rotate(45deg); }
 
-#journeyimages .container {
+#journey .container, #ushahidi .container {
   height: 600px;
   white-space: nowrap;
   position: absolute;
@@ -219,12 +219,12 @@ img {
   margin-top: -300px;
   background: #cde9f3; }
 
-#journeyimages .container img {
+#journey .container img {
   height: 600px;
   width: auto;
-  opacity: 0; }
+  opacity: 1; }
 
-#journeyimages .container img.active {
+#journey .container img.active {
   opacity: 1; }
 
 #resultsUshahidi > div, #picnic > div {
@@ -233,8 +233,15 @@ img {
   -webkit-justify-content: space-around;
   height: 100%; }
 
-#resultsUshahidi .multipleStarPlots .axis .legend {
-  fill: red; }
+.multipleStarPlots .axis .legend {
+  fill: #004c67;
+  font-size: 1.5rem !important;
+  font-family: "SAPFuturaNaBook", sans-serif !important;
+  display: none; }
+
+.multipleStarPlots {
+  text-align: center;
+  max-width: 350px; }
 
 #mobileSensors #iPhone {
   width: 200px;
@@ -256,3 +263,31 @@ img {
   margin-top: -189px;
   margin-left: -75px;
   display: none; }
+
+#explanation ul {
+  display: -webkit-flex;
+  -webkit-justify-content: space-around;
+  -webkit-align-items: center;
+  height: 100%;
+  font-size: 6rem;
+  margin-left: 0;
+  padding: 0 200px;
+  list-style: none; }
+
+#explanation li:nth-child(2) {
+  color: #310067; }
+
+#explanation li:nth-child(3) {
+  color: #670200; }
+
+#explanation li:nth-child(4) {
+  color: #196700; }
+
+#explanation ul span {
+  font-size: 0.5em; }
+
+#ushahidi img.flag {
+  -webkit-mask: url("/icon/image_mask.svg") top left/cover; }
+
+#ushahidi img:not(.flag) {
+  margin-left: -130px; }
