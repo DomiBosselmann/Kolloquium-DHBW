@@ -3,6 +3,7 @@ var cancelRequestAnimFrame = window.webkitCancelRequestAnimationFrame || window
 var getUserMedia = navigator.webkitGetUserMedia ? "webkitGetUserMedia" : "mozGetUserMedia";
 
 var charts = {
+	colors : ["#004c67","#310067","#670200","#196700"],
 	journey : {
 		INDEXH: 1,
 		init : function () {
@@ -48,8 +49,8 @@ var charts = {
 			
 			this.data = [220000, 240000];
 			
-			this.xRange = d3.scale.linear().range([200, 900]).domain([0, 3]);
-			this.yRange = d3.scale.linear().range([600, 0]).domain([0, 250000]);
+			this.xRange = d3.scale.linear().range([200, 710]).domain([0, 3]);
+			this.yRange = d3.scale.linear().range([600, 30]).domain([0, 250000]);
 			this.xAxis = d3.svg.axis().scale(this.xRange).tickSubdivide(0).tickSize(9,6,2).tickPadding(8).orient("top");
 			this.yAxis = d3.svg.axis().scale(this.yRange).ticks(3).tickSubdivide(1).tickSize(9, 6, 2).orient("left");
 			
@@ -60,9 +61,9 @@ var charts = {
 			this.yAxisElement.call(this.yAxis);
 						
 			
-			this.svg.selectAll("rect").data(this.data).enter().append("rect").attr("y", 600).attr("height", function (d) {
+			this.svg.selectAll("rect").data(this.data).enter().append("rect").attr("fill", charts.colors[0]).attr("y", 600).attr("height", function (d) {
 				return 0;
-			}).attr("width", 200).attr("fill", "green").attr("x", function (d, i) {
+			}).attr("width", 150).attr("x", function (d, i) {
 				return self.xRange(i);
 			}).transition().duration(3550).attr("height", function (d) {
 				return 600 - self.yRange(d);
@@ -87,7 +88,7 @@ var charts = {
 			
 			self.svg.selectAll("rect").data(self.data).enter().append("rect").attr("y", 600).attr("height", function (d) {
 				return 0;
-			}).attr("width", 200).attr("fill", "green").attr("x", function (d, i) {
+			}).attr("width", 150).attr("fill", charts.colors[1]).attr("x", function (d, i) {
 				return self.xRange(i);
 			}).transition().duration(3550).attr("height", function (d) {
 				return 600 - self.yRange(d);
@@ -98,6 +99,41 @@ var charts = {
 			self.yAxisElement.transition().duration(3550).call(self.yAxis);
 			
 			Reveal.removeEventListener("fragmentshown", charts.crime.showSouthAfricaPrivate);
+			Reveal.addEventListener("fragmentshown", charts.crime.showSouthAfricaCompanies);
+		},
+		showSouthAfricaCompanies : function () {
+			
+			var self = charts.crime;
+			
+			var svg = d3.select("#crime_securitycompanies");
+			
+			var data = [1127, 9320];
+			
+			var xRange = d3.scale.linear().range([0, 340]).domain([0, 2]);
+			var yRange = d3.scale.linear().range([600, 30]).domain([0, 10000]);
+			var xAxis = d3.svg.axis().scale(xRange).tickSubdivide(0).tickSize(9,6,2).tickPadding(8).orient("top");
+			var yAxis = d3.svg.axis().scale(yRange).ticks(3).tickSubdivide(1).tickSize(9, 6, 2).orient("right");
+			
+			var xAxisElement = svg.append("svg:g");
+			var yAxisElement = svg.append("svg:g").attr("transform", "translate(320,0)");
+			
+			xAxisElement.call(xAxis);
+			yAxisElement.call(yAxis);
+						
+			
+			svg.selectAll("rect").data(data).enter().append("rect").attr("fill", function (d, i) {
+				return charts.colors[i];
+			}).attr("y", 600).attr("height", function (d) {
+				return 0;
+			}).attr("width", 150).attr("x", function (d, i) {
+				return xRange(i);
+			}).transition().duration(3550).attr("height", function (d) {
+				return 600 - yRange(d);
+			}).attr("y", function (d, i) {
+				return yRange(d);
+			});
+			
+			Reveal.removeEventListener("fragmentshown", charts.crime.showSouthAfricaCompanies);
 		}
 	},
 	audio : {

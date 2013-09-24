@@ -337,6 +337,27 @@ img {
 	-webkit-transform: rotate(45deg);
 }
 
+#crimeSA {
+	height: 100%;
+}
+
+#crimeSA .container {
+	display: -webkit-flex;
+	-webkit-justify-content: space-around;
+	-webkit-align-items: center;
+	height: 100%;
+}
+
+#crimeSA #crime ~ p {
+	text-align: center;
+	margin-left: 200px;
+}
+
+#crimeSA #crime_securitycompanies ~ p {
+	text-align: center;
+	margin-right: 200px;
+}
+
 #journey .container, #ushahidi .container, #reportImages .container {
 	height: 600px;
 	white-space: nowrap;
