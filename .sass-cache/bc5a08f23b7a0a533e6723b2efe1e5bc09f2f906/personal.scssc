@@ -1,7 +1,7 @@
 3.2.10 (Media Mark)
-e7b9b01337a19c713950911a3442caf1d45683c1
+6e47e9f3c2e62d0d1b2095d0873f6a2a3aa4f737
 o:Sass::Tree::RootNode
-:@template"A%@mixin vertical-gradient( $top, $bottom ) {
+:@template"È%@mixin vertical-gradient( $top, $bottom ) {
 	background: $top;
 	background: -moz-linear-gradient( top, $top 0%, $bottom 100% );
 	background: -webkit-gradient( linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom) );
@@ -436,6 +436,13 @@ img {
 	margin-left: -130px;
 }
 
+#scenarioInformalSettlements #map_canvas, #scenarioInformalSettlements {
+	height: 100%;
+}
+
+#scenarioInformalSettlements #map_canvas {
+	-webkit-transform-origin: 80%;
+}
 #reports div {
 	position: relative;
 	display: inline-block;
@@ -446,7 +453,7 @@ img {
 	top: 0;
 	left: 0;
 }
-:@children[_o:Sass::Tree::MixinDefNode:
+:@children[ao:Sass::Tree::MixinDefNode:
 @name"vertical-gradient;[o:Sass::Tree::PropNode:
 @tabsi ;	["background;[ :@valueo:Sass::Script::Variable	:@underscored_name"top;	"top:@options{ :
 @linei;@;i:@prop_syntax:newo;
@@ -1005,14 +1012,21 @@ cover;@;i≠;i≠;G;H;Io;	;;;"	left;@;i≠;@;i≠;; ;@;i≠;;
 ;90;5@¸;:o;;;<{ ;i∞;6[o;D;	["ushahidi;5@¸;i∞o;8
 ;90;5@¸;:o;;;<{ ;i∞;6[o;=	;	["img;5@¸;i∞;>0o;@
 ;	["not;;C;5@¸;i∞;B["
-.flag;!To;0;i ;[o;
-;i ;	["position;[ ;o;;;;"relative;@;@;iµ;;o;
-;i ;	["display;[ ;o;;;;"inline-block;@;@;i∂;;;@;2["#reports div;i¥;3o;4;5" ;i¥;6[o;7;6[o;8
-;90;5@$;:o;;;<{ ;i¥;6[o;D;	["reports;5@$;i¥o;8
-;90;5@$;:o;;;<{ ;i¥;6[o;=	;	["div;5@$;i¥;>0;!To;0;i ;[o;
-;i ;	["position;[ ;o;;;;"absolute;@;@;i∫;;o;
-;i ;	["top;[ ;o;;;;"0;@;@;iª;;o;
-;i ;	["	left;[ ;o;;;;"0;@;@;iº;;;@;2["#reports div svg;iπ;3o;4;5" ;iπ;6[o;7;6[o;8
-;90;5@M;:o;;;<{ ;iπ;6[o;D;	["reports;5@M;iπo;8
-;90;5@M;:o;;;<{ ;iπ;6[o;=	;	["div;5@M;iπ;>0o;8
-;90;5@M;:o;;;<{ ;iπ;6[o;=	;	["svg;5@M;iπ;>0;!T;@;i;!T
+.flag;!To;0;i ;[o;
+;i ;	["height;[ ;o;;;;"	100%;@;@;iµ;;;@;2["K#scenarioInformalSettlements #map_canvas, #scenarioInformalSettlements;i¥;3o;4;5" ;i¥;6[o;7;6[o;8
+;90;5@;:o;;;<{ ;i¥;6[o;D;	[" scenarioInformalSettlements;5@;i¥o;8
+;90;5@;:o;;;<{ ;i¥;6[o;D;	["map_canvas;5@;i¥o;7;6[o;8
+;90;5@;:o;;;<{ ;i¥;6[o;D;	[" scenarioInformalSettlements;5@;i¥;!To;0;i ;[o;
+;i ;	["-webkit-transform-origin;[ ;o;;;;"80%;@;@;iπ;;;@;2["-#scenarioInformalSettlements #map_canvas;i∏;3o;4;5" ;i∏;6[o;7;6[o;8
+;90;5@D;:o;;;<{ ;i∏;6[o;D;	[" scenarioInformalSettlements;5@D;i∏o;8
+;90;5@D;:o;;;<{ ;i∏;6[o;D;	["map_canvas;5@D;i∏;!To;0;i ;[o;
+;i ;	["position;[ ;o;;;;"relative;@;@;iº;;o;
+;i ;	["display;[ ;o;;;;"inline-block;@;@;iΩ;;;@;2["#reports div;iª;3o;4;5" ;iª;6[o;7;6[o;8
+;90;5@g;:o;;;<{ ;iª;6[o;D;	["reports;5@g;iªo;8
+;90;5@g;:o;;;<{ ;iª;6[o;=	;	["div;5@g;iª;>0;!To;0;i ;[o;
+;i ;	["position;[ ;o;;;;"absolute;@;@;i¡;;o;
+;i ;	["top;[ ;o;;;;"0;@;@;i¬;;o;
+;i ;	["	left;[ ;o;;;;"0;@;@;i√;;;@;2["#reports div svg;i¿;3o;4;5" ;i¿;6[o;7;6[o;8
+;90;5@ê;:o;;;<{ ;i¿;6[o;D;	["reports;5@ê;i¿o;8
+;90;5@ê;:o;;;<{ ;i¿;6[o;=	;	["div;5@ê;i¿;>0o;8
+;90;5@ê;:o;;;<{ ;i¿;6[o;=	;	["svg;5@ê;i¿;>0;!T;@;i;!T

@@ -433,6 +433,13 @@ img {
 	margin-left: -130px;
 }
 
+#scenarioInformalSettlements #map_canvas, #scenarioInformalSettlements {
+	height: 100%;
+}
+
+#scenarioInformalSettlements #map_canvas {
+	-webkit-transform-origin: 80%;
+}
 #reports div {
 	position: relative;
 	display: inline-block;

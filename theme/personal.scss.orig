@@ -61,6 +61,8 @@ $selectionColor: #fff;
 
 // colors
 $secondaryColor: #310067;
+$tertiarColor: #670200;
+$quartarColor: #196700;
 
 // Generates the presentation background, can be overridden
 // to return a background image or gradient
@@ -292,7 +294,7 @@ img {
 
 #intro .contact {
 	position: absolute;
-	bottom: 120px;
+	bottom: 80px;
 	left: 0;
 	height: 60px;
 	line-height: 60px;
@@ -335,14 +337,7 @@ img {
 	-webkit-transform: rotate(45deg);
 }
 
-<<<<<<< HEAD
-
-#resultsUshahidi > div {
-	display: -webkit-flex;
-	-webkit-align-items: center;
-	-webkit-justify-content: space-around;
-=======
-#journeyimages .container {
+#journey .container, #ushahidi .container, #reportImages .container {
 	height: 600px;
 	white-space: nowrap;
 	position: absolute;
@@ -351,13 +346,110 @@ img {
 	background: $secondaryBackgroundColor;
 }
 
-#journeyimages .container img {
+#journey .container img {
 	height: 600px;
 	width: auto;
-	opacity: 0;
+	opacity: 1;
 }
 
-#journeyimages .container img.active {
+#journey .container img.active {
 	opacity: 1;
->>>>>>> 7712e96db2d51beee1b4f55841a4ade588f28ed4
 }
+
+#resultsUshahidi > div, #picnic > div {
+	display: -webkit-flex;
+	-webkit-align-items: center;
+	-webkit-justify-content: space-around;
+	height: 100%;
+}
+
+.multipleStarPlots .axis .legend {
+	fill: $mainColor;
+	font-size: 1.5rem !important;
+	font-family: $mainFont !important;
+	display: none;
+}
+
+.multipleStarPlots {
+	text-align: center;
+	max-width: 350px;
+}
+
+#mobileSensors #iPhone {
+	width: 200px;
+	height: 378px;
+	-webkit-wrap-flow: both;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -189px;
+	margin-left: -100px;
+}
+
+#mobileSensors #Samsung {
+	width: 150px;
+	height: 378px;
+	-webkit-wrap-flow: both;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -189px;
+	margin-left: -75px;
+	display: none;
+}
+
+#explanation ul {
+	display: -webkit-flex;
+	-webkit-justify-content: space-around;
+	-webkit-align-items: center;
+	height: 100%;
+	font-size: 6rem;
+	margin-left: 0;
+	padding: 0 200px;
+	list-style: none;
+}
+
+#explanation li:nth-child(2) {
+	color: $secondaryColor;
+}
+
+#explanation li:nth-child(3) {
+	color: $tertiarColor;
+}
+
+#explanation li:nth-child(4) {
+	color: $quartarColor;
+}
+
+#explanation ul span {
+	font-size: 0.5em;
+}
+
+#ushahidi img.flag {
+	-webkit-mask: url("/icon/image_mask.svg") top left / cover;
+}
+
+#ushahidi img:not(.flag) {
+	margin-left: -130px;
+}
+
+<<<<<<< HEAD
+#reports div {
+	position: relative;
+	display: inline-block;
+}
+
+#reports div svg {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+=======
+#scenarioInformalSettlements #map_canvas, #scenarioInformalSettlements {
+	height: 100%;
+}
+
+#scenarioInformalSettlements #map_canvas {
+	-webkit-transform-origin: 80%;
+}
+>>>>>>> 043d1af2b8b4fc1c61405fe195e7cf09ab9158ed
