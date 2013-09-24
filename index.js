@@ -415,6 +415,44 @@ var charts = {
 		stop : function () {
 			
 		}
+	},
+	scenarioInformalSettlements : {
+		INDEXH: 9,
+		init : function () {
+			Reveal.addEventListener("slidechanged", this.start.bind(this));
+			this.start.call(this, event);
+		},
+		start : function (event) {
+			if (event.indexh !== this.INDEXH) {
+				this.stop();				
+				return;
+			}
+			
+			this.canvas = document.getElementById("map_canvas");
+		
+			var mapOptions = {
+				center: new google.maps.LatLng(-25.714602550921747, 28.423822051525125),
+				zoom: 18,
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+				disableDefaultUI: true,
+				backgroundColor: "#cde9f3"
+			};
+			
+			this.map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+			
+			Reveal.addEventListener("fragmentshown", this.showScenarioDetails);
+		},
+		stop : function () {
+			
+		},
+		showScenarioDetails : function () {
+			var self = charts.scenarioInformalSettlements;
+		
+			var canvas = d3.select(self.canvas);
+			canvas.transition().duration(1000).style("-webkit-transform", "rotateX(90deg) translateY(20%)");
+			
+			Reveal.removeEventListener("fragmentshown", charts.scenarioInformalSettlements.showScenarioDetails);
+		}
 	}
 }
 
@@ -425,4 +463,5 @@ Reveal.addEventListener( 'ready', function( event ) {
 	charts.mobileSensors.init.call(charts.mobileSensors);
 	charts.resultsUshahidi.init.call(charts.resultsUshahidi);
 	charts.picnic.init.call(charts.picnic);
+	charts.scenarioInformalSettlements.init.call(charts.scenarioInformalSettlements);
 });
