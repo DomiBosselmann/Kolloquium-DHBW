@@ -415,6 +415,124 @@ var charts = {
 		stop : function () {
 			
 		}
+	},
+	unasableReports : {
+		INDEXH: 9,
+		init : function () {
+			
+			this.container = d3.select("#reports");
+			this.images = this.container.selectAll("img");
+			
+			this.charts = [];
+			var charts = this.charts;
+			
+			this.rawData = [];
+			this.svgs = [];
+			var rawData = this.rawData;
+			var svgs = this.svgs;
+			var self = this;
+						
+			this.images.each(function () {
+				d3.select(this).on("load", function () {
+					var container = d3.select(this.parentNode);
+					var images = d3.select(this);
+					var dimensions = images.node().getBoundingClientRect();
+					var canvas = container.append("canvas").attr("width", dimensions.width).attr("height", dimensions.height);
+					var context = canvas.node().getContext("2d");
+					
+					context.drawImage(images.node(), 0, 0, dimensions.width, dimensions.height);
+					
+					var origData = context.getImageData(0, 0, dimensions.width, dimensions.height).data;
+					var brightness = [];
+					
+					for (var i = 0; i < origData.length; i = i + 4) {
+						brightness.push(origData[i] * 0.2126 + origData[i + 1] * 0.7152 + origData[i + 2] * 0.0722);
+					}
+					
+					canvas.remove();
+										
+					var xRange = d3.scale.linear().domain([0, 255]).range([0, dimensions.width]);
+					var data = d3.layout.histogram().bins(xRange.ticks(255))(brightness);
+					var yRange = d3.scale.linear().domain([0, d3.max(data, function(d) { return d.y; })]).range([dimensions.height, 0]);
+										
+					var svg = container.append("svg").attr("width", dimensions.width).attr("height", dimensions.height);
+					svg.selectAll("rect").data(data).enter().append("rect").attr("x", function (d) {
+						return xRange(d.x)
+					}).attr("y", function (d) {
+						return yRange(d.y);
+					}).attr("height", function (d) {
+						return dimensions.height - yRange(d.y);
+					}).attr("width", xRange(data[0].dx));
+					
+					charts.push({
+						svg : svg,
+						data : origData,
+						dimensions : dimensions,
+						xRange : xRange,
+						yRange : yRange
+					});
+					
+				}.bind(this));
+			});
+			
+			Reveal.addEventListener("slidechanged", this.start.bind(this));
+			this.start.call(this, event);
+		},
+		start : function (event) {
+			if (event.indexh !== this.INDEXH) {
+				this.stop();				
+				return;
+			}
+			
+			Reveal.addEventListener("fragmentshown", this.showColors);
+		},
+		stop : function () {
+			
+		},
+		showColors : function () {
+			debugger;
+			var self = charts.unasableReports;
+			var uniqueColors = [];
+			
+			for (var i = 0; i < self.charts.length; i++) {
+				var colors = [];
+				for (var j = 0; j < self.charts[i].data.length; j = j + 4) {
+					var hue = 0;
+					var max = d3.max([self.charts[i].data[j + 0], self.charts[i].data[j + 1], self.charts[i].data[j + 2]]);
+					var min = d3.min([self.charts[i].data[j + 0], self.charts[i].data[j + 1], self.charts[i].data[j + 2]]);
+					
+					if (max === min) {
+						hue = 0;
+					} else if (max === self.charts[i].data[j + 0]) {
+						hue = 60 * (self.charts[i].data[j + 1] - self.charts[i].data[j + 2]) / (max - min);
+					} else if (max === self.charts[i].data[j + 1]) {
+						hue = 60 * (2 + (self.charts[i].data[j + 2] - self.charts[i].data[j + 0]) / (max - min));
+					} else if (max === self.charts[i].data[j + 2]) {
+						hue = 60 * (4 + (self.charts[i].data[j + 0] - self.charts[i].data[j + 1]) / (max - min));
+					}
+					
+					hue += hue < 0 ? 360 : 0;
+					
+					colors.push(hue);
+				}
+				
+				//uniqueColors.push(colors);
+				
+				var xRange = self.charts[i].xRange.domain([0, 360]);
+				var data = d3.layout.histogram().bins(xRange.ticks(360))(colors);
+				var yRange = self.charts[i].yRange.domain([0, d3.max(data, function(d) { return d.y; })]);
+				
+				self.charts[i].svg.selectAll("rect").data(data).transition().duration(1000).attr("x", function (d) {
+					return xRange(d.x)
+				}).attr("y", function (d) {
+					return yRange(d.y);
+				}).attr("height", function (d) {
+					return self.charts[i].dimensions.height - yRange(d.y);
+				}).attr("width", xRange(data[0].dx));
+			}
+			
+			Reveal.addEventListener("fragmentshown", self.showColors);
+		}
 	}
 }
 
@@ -425,4 +543,5 @@ Reveal.addEventListener( 'ready', function( event ) {
 	charts.mobileSensors.init.call(charts.mobileSensors);
 	charts.resultsUshahidi.init.call(charts.resultsUshahidi);
 	charts.picnic.init.call(charts.picnic);
+	charts.unasableReports.init.call(charts.unasableReports);
 });

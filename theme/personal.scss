@@ -337,7 +337,7 @@ img {
 	-webkit-transform: rotate(45deg);
 }
 
-#journey .container, #ushahidi .container {
+#journey .container, #ushahidi .container, #reportImages .container {
 	height: 600px;
 	white-space: nowrap;
 	position: absolute;
@@ -431,4 +431,15 @@ img {
 
 #ushahidi img:not(.flag) {
 	margin-left: -130px;
+}
+
+#reports div {
+	position: relative;
+	display: inline-block;
+}
+
+#reports div svg {
+	position: absolute;
+	top: 0;
+	left: 0;
 }
