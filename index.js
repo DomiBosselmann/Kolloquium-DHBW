@@ -283,7 +283,7 @@ var charts = {
 			this.canvas = d3.select("#mobileSensors > ul");
 			this.data = [
 				{ name : "GPS", icon : "icon/gps.svg" },
-				{ name : "Beschleunigungs-sensor", icon : "icon/gps.svg" },
+				{ name : "Beschleunigungs-sensor", icon : "icon/gyroscope.svg" },
 				{ name : "Gyroskop", icon : "icon/gyroscope.svg" },
 				{ name : "Mikrofon", icon : "icon/microphone.svg" },
 				{ name : "Frontkamera", icon : "icon/camera.svg" },
