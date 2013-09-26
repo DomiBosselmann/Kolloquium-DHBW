@@ -607,10 +607,251 @@ var charts = {
 			
 			Reveal.addEventListener("fragmentshown", self.showColors);
 		}
+	},
+	activityRecognition : {
+		INDEXH: 11,
+		init : function () {
+			Reveal.addEventListener("slidechanged", this.start.bind(this));
+			this.start.call(this, event);
+		},
+		start : function (event) {
+			if (event.indexh !== this.INDEXH) {
+				this.stop();				
+				return;
+			}
+			
+			this.svg = d3.select("#accelerometer");
+			
+			var dimensions = this.svg.node().getBoundingClientRect();
+			
+			this.width = dimensions.width;
+			this.height = dimensions.height;
+			
+			
+			this.data = [
+			[-0.46309182,-0.7627395,-0.88532263,-0.6946377,-0.9942854,-1.3075534,-1.3756552,-1.4165162,-1.334794,-1.920469,-1.7570249,-2.3018389,-2.3699405,-2.152015,-2.2609777,-2.3018389,-1.9477097,-1.9885708,-1.920469,-1.1441092,-1.1441092,-1.1849703,-0.9942854,-1.1441092,-0.38136974,-0.61291564,0.10896278,0.3405087,-0.08172209,0.27240697,0.84446156,0.46309182,-0.14982383,0.3405087,0.50395286,0.50395286,1.334794,0.27240697,0.50395286,0.50395286,0.3405087,0.42223078,-0.23154591,-0.38136974,-0.42223078,-0.42223078],
+			[9.697687,9.847511,9.847511,9.765789,9.847511,9.80665,9.847511,9.997335,9.956474,9.956474,9.888372,9.915613,9.956474,9.956474,9.956474,9.888372,9.847511,9.888372,9.888372,10.038197,10.18802,10.18802,9.997335,9.697687,9.575105,9.466142,9.656827,9.384419,9.697687,9.615966,9.80665,9.466142,9.384419,9.507003,9.656827,9.847511,9.847511,9.915613,9.956474,10.119919,10.337844,10.310603,10.337844,10.119919,9.765789,9.915613],
+			[1.9885708,1.7570249,2.1111538,1.9885708,1.525479,1.8387469,1.7570249,1.7978859,1.9885708,1.879608,1.525479,1.8387469,1.4982382,1.6480621,1.4982382,1.607201,1.334794,1.2666923,1.607201,1.3756552,1.4165162,1.879608,1.56634,1.879608,2.1383946,1.6889231,1.56634,1.3075534,1.9477097,1.920469,1.920469,1.6480621,1.879608,2.4516625,2.1111538,2.8330324,2.4925237,2.4108016,2.1383946,2.4108016,2.0294318,2.070293,2.2609777,1.4573772,1.9477097,2.4516625]
+			];
+						
+			var max = d3.max(this.data, function (d) {
+				return d3.max(d);
+			});
+			
+			var min = d3.min(this.data, function (d) {
+				return d3.min(d);
+			});
+			
+			if (Math.abs(min) > Math.abs(max)) {
+				this.totalMax = Math.abs(min);
+			} else {
+				this.totalMax = Math.abs(max);
+			}
+			
+			this.totalMin = - this.totalMax; 
+			
+			this.data = [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			];
+			
+						
+			
+			this.xRange = d3.scale.linear().range([60, this.width - 10]).domain([0, this.data[0].length]);
+			this.yRange = d3.scale.linear().range([this.height - 10, 10]).domain([this.totalMin, this.totalMax]);
+			this.xAxisElement = this.svg.append("g");
+			this.yAxisElement = this.svg.append("g");
+			this.lineFunction = d3.svg.line()
+				.x(function(d, i) {
+					return this.xRange(i);
+				}.bind(this))
+				.y(function(d) {
+					return this.yRange(d);
+				}.bind(this));
+			this.areaFunction = d3.svg.area()
+				.x(function(d, i) {
+					return this.xRange(i);
+				}.bind(this))
+				.y0(function (d) {
+					return this.height / 2;
+				}.bind(this))
+				.y1(function(d) {
+					return this.yRange(d);
+				}.bind(this));
+				
+			var colors = ["green", "blue", "red"];
+				
+			this.path = this.svg.selectAll("path").data(this.data).enter().append("path").attr("stroke-width", "2").attr("stroke", function (d, i) {
+				return colors[i];
+			}).attr("fill", "rgba(0, 128, 0, 0)").attr("d", this.lineFunction).classed("data", true);
+			
+			this.data = [
+			[-0.46309182,-0.7627395,-0.88532263,-0.6946377,-0.9942854,-1.3075534,-1.3756552,-1.4165162,-1.334794,-1.920469,-1.7570249,-2.3018389,-2.3699405,-2.152015,-2.2609777,-2.3018389,-1.9477097,-1.9885708,-1.920469,-1.1441092,-1.1441092,-1.1849703,-0.9942854,-1.1441092,-0.38136974,-0.61291564,0.10896278,0.3405087,-0.08172209,0.27240697,0.84446156,0.46309182,-0.14982383,0.3405087,0.50395286,0.50395286,1.334794,0.27240697,0.50395286,0.50395286,0.3405087,0.42223078,-0.23154591,-0.38136974,-0.42223078,-0.42223078],
+			[9.697687,9.847511,9.847511,9.765789,9.847511,9.80665,9.847511,9.997335,9.956474,9.956474,9.888372,9.915613,9.956474,9.956474,9.956474,9.888372,9.847511,9.888372,9.888372,10.038197,10.18802,10.18802,9.997335,9.697687,9.575105,9.466142,9.656827,9.384419,9.697687,9.615966,9.80665,9.466142,9.384419,9.507003,9.656827,9.847511,9.847511,9.915613,9.956474,10.119919,10.337844,10.310603,10.337844,10.119919,9.765789,9.915613],
+			[1.9885708,1.7570249,2.1111538,1.9885708,1.525479,1.8387469,1.7570249,1.7978859,1.9885708,1.879608,1.525479,1.8387469,1.4982382,1.6480621,1.4982382,1.607201,1.334794,1.2666923,1.607201,1.3756552,1.4165162,1.879608,1.56634,1.879608,2.1383946,1.6889231,1.56634,1.3075534,1.9477097,1.920469,1.920469,1.6480621,1.879608,2.4516625,2.1111538,2.8330324,2.4925237,2.4108016,2.1383946,2.4108016,2.0294318,2.070293,2.2609777,1.4573772,1.9477097,2.4516625]
+			];
+
+			
+			this.svg.selectAll("path.data").data(this.data).transition().duration(1500).attr("d", this.lineFunction);
+			
+			
+			this.xAxisElement.attr("transform", "translate(" + 0 + "," + (this.height / 2 - 1) + ")");
+			this.yAxisElement.attr("transform", "translate(" + 60 + "," + (0) + ")");
+		
+			// Setup Axis
+			this.xAxis = d3.svg.axis().scale(this.xRange).orient("bottom").tickSubdivide(0).tickSize(9, 6, 2).tickPadding(8);
+			this.yAxis = d3.svg.axis().scale(this.yRange).orient("left").tickSubdivide(0).tickSize(9, 6, 2).tickPadding(8);
+		
+			this.xAxisElement.call(this.xAxis);
+			this.yAxisElement.call(this.yAxis);
+
+			Reveal.addEventListener("fragmentshown", this.showIntegral);
+		},
+		stop : function () {
+			
+		},
+		showIntegral : function () {
+			var self = charts.activityRecognition;
+			
+			var data = self.data.slice(0, 1);
+						
+			self.svg.selectAll("path.data").data(data).exit().transition().duration(1000).attr("stroke", "#cde9f3");
+			self.svg.selectAll("path.data").data(data).classed("focus", true).transition().delay(1000).duration(1000).attr("d", self.areaFunction).attr("fill", "rgba(0, 128, 0, 1)");
+			
+			Reveal.removeEventListener("fragmentshown", self.showIntegral);
+			Reveal.addEventListener("fragmentshown", self.showDoppelIntegral);
+		},
+		showDoppelIntegral : function () {
+			var self = charts.activityRecognition;
+			
+			var origData = self.data.slice(0, 1)[0];
+			var data = [];
+			
+			origData.forEach(function (value, i) {
+				data.push(numerics.integrate(origData, 0, i));
+			});
+			
+			data[0] = 0;
+			
+			data = [data];
+			
+			
+			var max = d3.max(data, function (d) {
+				return d3.max(d);
+			});
+			
+			var min = d3.min(data, function (d) {
+				return d3.min(d);
+			});
+			
+			if (Math.abs(min) > Math.abs(max)) {
+				var totalMax = Math.abs(min);
+			} else {
+				var totalMax = Math.abs(max);
+			}
+			
+			var totalMin = - totalMax; 
+						
+			self.xRange = self.xRange.domain([0, self.data[0].length]);
+			self.yRange = self.yRange.domain([totalMin, totalMax]);
+			
+			self.xAxisElement.transition().duration(1000).call(self.xAxis);
+			self.yAxisElement.transition().duration(1000).call(self.yAxis);
+			
+			self.svg.selectAll("path.data.focus").data(data).transition().delay(1000).duration(1000).attr("d", self.areaFunction);
+			
+			Reveal.removeEventListener("fragmentshown", self.showDoppelIntegral);
+		}
+	}
+}
+
+var numerics = {
+	calcFirstDerivation : function (a, b, c, d, e) {
+		// a & b in the past
+		// c current
+		// d & e in the future
+		
+		if (b === undefined) {
+			return (- 0.5 * e + 2 * d - 1.5 * c) / 3;
+		}
+		
+		if (d === undefined) {
+			return (1.5 * c - 2 * b + 0.5 * a) / 3;
+		}
+		
+		return (0.2 * e + 0.1 * d - 0.1 * b - 0.2 * a) / 5;
+	},
+	integrate : function (y, start, end, scale) {
+		start = start || 0;
+		end = end || y.length - 1;
+		
+		scale = scale || 1;
+		
+		var n = end - start;
+		var sum = 0;
+		
+		if (n === 0) {
+			return sum;
+		}
+		
+		if (n % 2 === 1) {
+			sum += numerics.integrateViaTrapez(y, end - 1, end);
+			sum += numerics.integrateViaSimpson(y, start, end - 1);
+		} else {
+			sum += numerics.integrateViaSimpson(y, start, end);
+		}
+		
+		return sum / scale;
+	},
+	integrateViaSimpson : function (y, start, end) {
+		var sum = 0;
+		var h = 2;
+		var n = end - start;
+		var i = start;
+		var a = 0;
+		var b = 0;
+		var c;
+		
+		if (n % 2 === 1) {
+			throw new RangeError("Can't be integrated, because the range is not gerade.");
+		}
+		
+		if (n === 0) {
+			return 0;
+		}
+		
+		c = y[start] + y[end];
+		
+		for (; i < end; i = i + h) {
+			a += y[i + 0.5 * h];
+			b += i === end - h ? 0 : y[i + h];
+		}
+		
+		sum += c / 2 + 2 * a + b;
+					
+		return sum * h / 3;
+	},
+	integrateViaTrapez : function (y, start, end) {
+		var sum;
+		var h = 1;
+		var n = end - start;
+		var i = start;
+		var a = y[start] + y[end];
+		var b = 0;
+		
+		for (; i < end - h; i = i + h) {
+			b += y[i + h];
+		}
+		
+		sum = a / 2 + b;
+		
+		return sum * h;
 	}
 }
 
 Reveal.addEventListener( 'ready', function( event ) {
+	charts.unasableReports.init.call(charts.unasableReports);
 	charts.crime.init.call(charts.crime);
 	charts.journey.init.call(charts.journey);
 	charts.audio.init.call(charts.audio);
@@ -618,5 +859,5 @@ Reveal.addEventListener( 'ready', function( event ) {
 	charts.resultsUshahidi.init.call(charts.resultsUshahidi);
 	charts.picnic.init.call(charts.picnic);
 	charts.scenarioInformalSettlements.init.call(charts.scenarioInformalSettlements);
-	charts.unasableReports.init.call(charts.unasableReports);
+	charts.activityRecognition.init.call(charts.activityRecognition);
 });
